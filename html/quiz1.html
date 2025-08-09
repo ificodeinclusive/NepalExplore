@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Nepal Explorer - Budget Selection</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-mountain"></i>
+                <span>Nepal Explorer</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="quiz-header">
+        <h2>Please choose the answer</h2>
+    </div>
+
+    <div class="quiz-container">
+        <div class="quiz-progress-container">
+            <div class="quiz-progress">
+                <div class="progress-bar" style="width: 12.5%"></div>
+            </div>
+            <div class="progress-text">Question 1 of 8</div>
+        </div>
+
+        <div class="question-container">
+            <div class="question-icon">
+                <i class="fas fa-wallet"></i>
+            </div>
+            <h2 class="question-title">What is your budget for this trip?</h2>
+            <p class="question-subtitle">Choose the budget range that works best for you</p>
+            
+            <div class="options-grid">
+                <label class="option-card">
+                    <input type="radio" name="budget" value="Low">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>Low</h3>
+                        <p>Affordable options for budget-conscious travelers</p>
+                        </div>
+                    </div>
+                </label>
+                
+                <label class="option-card">
+                    <input type="radio" name="budget" value="Medium">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>Medium</h3>
+                        <p>Comfortable travel with good value for money</p>
+                        </div>
+                    </div>
+                </label>
+                
+                <label class="option-card">
+                    <input type="radio" name="budget" value="High">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>High</h3>
+                        <p>Premium experiences and luxury accommodations</p>
+                        </div>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">2025 @Copyright iFiCode Inclusive - <a href="https://ificode.com" class="footer-link" target="_blank">ificode.com</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const radioButtons = document.querySelectorAll('input[name="budget"]');
+            
+            radioButtons.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.checked) {
+                        localStorage.setItem('budget', this.value);
+                        
+                        setTimeout(() => {
+                            window.location.href = 'quiz2.html';
+                        }, 1000);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

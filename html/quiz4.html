@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepal Explorer - Duration Selection</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-mountain"></i>
+                <span>Nepal Explorer</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="quiz-header">
+        <h2>Please choose the answer</h2>
+    </div>
+
+    <div class="quiz-container">
+        <div class="quiz-progress-container">
+            <div class="quiz-progress">
+                <div class="progress-bar" style="width: 50%"></div>
+            </div>
+            <div class="progress-text">Question 4 of 8</div>
+        </div>
+
+        <div class="question-container">
+            <div class="question-icon">
+                <i class="fas fa-calendar-day"></i>
+            </div>
+            <h2 class="question-title">How many days can you travel?</h2>
+            <p class="question-subtitle">Enter the number of days for your trip (e.g., 3-14)</p>
+            
+            <div class="options-grid">
+                <div class="option-card">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>Duration</h3>
+                            <input type="number" id="days" name="days" min="1" max="30" placeholder="Enter number of days" 
+                                   style="width: 150px; padding: 8px; border: 2px solid #667eea; border-radius: 8px; font-size: 14px; text-align: center; margin-top: 5px;">
+                            <p style="margin-top: 5px; color: #666; font-size: 0.8rem;">Enter a number between 1-30</p>
+                            <button type="button" id="submit-btn" 
+                                    style="margin-top: 15px; padding: 10px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; transition: all 0.3s ease;">
+                                Submit & Continue
+                            </button>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">2025 @Copyright iFiCode Inclusive - <a href="https://ificode.com" class="footer-link" target="_blank">ificode.com</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const daysInput = document.getElementById('days');
+            const submitBtn = document.getElementById('submit-btn');
+            
+            // Create error message element
+            const errorMessage = document.createElement('div');
+            errorMessage.id = 'error-message';
+            errorMessage.style.color = '#ff4757';
+            errorMessage.style.fontSize = '0.9rem';
+            errorMessage.style.marginTop = '5px';
+            errorMessage.style.textAlign = 'center';
+            errorMessage.style.display = 'none';
+            
+            // Insert error message after the input
+            daysInput.parentNode.appendChild(errorMessage);
+            
+            // Function to validate input
+            function validateInput() {
+                const value = parseInt(daysInput.value);
+                
+                // Hide error message initially
+                errorMessage.style.display = 'none';
+                
+                // Check if input is valid
+                if (daysInput.value === '' || isNaN(value)) {
+                    errorMessage.textContent = 'Please enter a valid number';
+                    errorMessage.style.display = 'block';
+                    return false;
+                }
+                
+                if (value < 1 || value > 30) {
+                    // Show error message
+                    errorMessage.textContent = 'Invalid! Please enter a number between 1-30';
+                    errorMessage.style.display = 'block';
+                    return false;
+                }
+                
+                return true;
+            }
+            
+            // Handle submit button click
+            submitBtn.addEventListener('click', function() {
+                if (validateInput()) {
+                    // Valid input - save and proceed to next page
+                    localStorage.setItem('days', daysInput.value);
+                    
+                    // Change button text to show processing
+                    submitBtn.textContent = 'Processing...';
+                    submitBtn.style.opacity = '0.7';
+                    submitBtn.disabled = true;
+                    
+                    setTimeout(() => {
+                        window.location.href = 'quiz5.html';
+                    }, 1000);
+                }
+            });
+            
+            // Handle Enter key on input
+            daysInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    submitBtn.click(); // Trigger submit button click
+                }
+            });
+            
+            // Real-time validation feedback (optional)
+            daysInput.addEventListener('input', function() {
+                // Clear error message when user starts typing
+                errorMessage.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

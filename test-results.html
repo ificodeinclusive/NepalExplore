@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Results - Nepal Explorer</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-mountain"></i>
+                <span>Nepal Explorer</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="results-hero">
+        <div class="results-hero-background">
+            <div class="results-hero-overlay"></div>
+        </div>
+        <div class="results-hero-content">
+            <h1>Based on your preferences, here are the best places to visit in Nepal</h1>
+        </div>
+    </div>
+
+    <div class="results-container">
+        <div class="results-header">
+            <div class="results-summary">
+                <h2><i class="fas fa-star"></i> Your Personalized Recommendations</h2>
+                <p>Based on your preferences, here are the best destinations for you in Nepal</p>
+            </div>
+        </div>
+        <div id="results" class="results-grid">
+            <!-- Results will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <script src="JS/script.js"></script>
+    <script>
+        // Set test data in localStorage
+        localStorage.setItem('userBudget', 'medium');
+        localStorage.setItem('userExperience', 'nature');
+        localStorage.setItem('userSeason', 'spring');
+        localStorage.setItem('userDuration', '5');
+        localStorage.setItem('userTravelType', 'couple');
+        localStorage.setItem('userClimate', 'moderate');
+        localStorage.setItem('userAtmosphere', 'peaceful');
+        localStorage.setItem('final', 'View Results');
+        
+        // Call displayResults after setting test data
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Test page loaded, calling displayResults...');
+            displayResults();
+        });
+    </script>
+</body>
+</html>

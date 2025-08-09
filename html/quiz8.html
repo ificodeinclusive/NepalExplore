@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepal Explorer - Atmosphere Selection</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-mountain"></i>
+                <span>Nepal Explorer</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="quiz-header">
+        <h2>Please choose the answer</h2>
+    </div>
+
+    <div class="quiz-container">
+        <div class="quiz-progress-container">
+            <div class="quiz-progress">
+                <div class="progress-bar" style="width: 100%"></div>
+            </div>
+            <div class="progress-text">Question 8 of 8</div>
+        </div>
+
+        <div class="question-container">
+            <div class="question-icon">
+                <i class="fas fa-volume-up"></i>
+            </div>
+            <h2 class="question-title">Thank you for completing the quiz!</h2>
+            <p class="question-subtitle">Click any option to see your personalized destination recommendation</p>
+            
+            <div class="options-grid">
+                <label class="option-card">
+                    <input type="radio" name="final" value="View My Results">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>View My Results</h3>
+                            <p>See destinations that match your preferences perfectly</p>
+                        </div>
+                    </div>
+                </label>
+                
+                <label class="option-card">
+                    <input type="radio" name="final" value="Get Recommendation">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>Get Recommendation</h3>
+                            <p>Discover top 5 Nepal destinations for you</p>
+                        </div>
+                    </div>
+                </label>
+                
+                <label class="option-card">
+                    <input type="radio" name="final" value="Find My Destination">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-compass"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>Find My Destination</h3>
+                            <p>Let's find your ideal travel spot</p>
+                        </div>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">2025 @Copyright iFiCode Inclusive - <a href="https://ificode.com" class="footer-link" target="_blank">ificode.com</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const radioButtons = document.querySelectorAll('input[name="final"]');
+            
+            radioButtons.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.checked) {
+                        localStorage.setItem('final', this.value);
+                        
+                        setTimeout(() => {
+                            // Redirect to top5.html if "Get Recommendation" is selected
+                            if (this.value === 'Get Recommendation') {
+                                window.location.href = 'top5.html';
+                            } else {
+                                // Redirect to result.html for other options
+                                window.location.href = 'result.html';
+                            }
+                        }, 1000);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

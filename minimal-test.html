@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Test</title>
+    <style>
+        .destination-card {
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .destination-left {
+            display: flex;
+            gap: 20px;
+        }
+        .destination-image img {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+        }
+        .activity-tag {
+            background: #667eea;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin: 2px;
+            display: inline-block;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Minimal Test - Nepal Destinations</h1>
+    <div id="results"></div>
+    
+    <script>
+        const places = [
+            {
+                name: "Pokhara",
+                budget: "medium",
+                experience: ["nature", "adventure", "relaxation"],
+                season: ["spring", "autumn"],
+                duration: [3, 7],
+                travelType: ["couple", "friends", "family", "solo"],
+                climate: ["moderate"],
+                atmosphere: "balanced",
+                Image_URL: "https://mysticadventureholidays.com/_next/image?url=https%3A%2F%2Fmedia.app.mysticadventureholidays.com%2Fuploads%2Ffullbanner%2Fpokhara-socoal.webp&w=3840&q=75",
+                Description: "Pokhara is a beautiful city surrounded by the Annapurna mountains and blessed with the tranquil Phewa Lake."
+            },
+            {
+                name: "Lumbini",
+                budget: "low",
+                experience: ["cultural", "spiritual"],
+                season: ["winter", "spring"],
+                duration: [2, 4],
+                travelType: ["solo", "couple", "family"],
+                climate: ["warm", "moderate"],
+                atmosphere: "peaceful",
+                Image_URL: "https://lumbinidevtrust.gov.np/upload_file/images/slider/1721894939_276597348_lumbini.jpg",
+                Description: "Lumbini is the birthplace of Lord Buddha and a peaceful place filled with monasteries, gardens, and historical sites."
+            }
+        ];
+        
+        function displayResults() {
+            console.log('displayResults called');
+            
+            // Set test preferences
+            const userPreferences = {
+                budget: 'medium',
+                experience: 'nature',
+                season: 'spring',
+                duration: 5,
+                travelType: 'couple',
+                climate: 'moderate',
+                atmosphere: 'peaceful'
+            };
+            
+            console.log('User Preferences:', userPreferences);
+            
+            const matchedPlaces = places.map(place => {
+                let score = 0;
+                
+                if (place.budget === userPreferences.budget) score++;
+                if (userPreferences.experience && place.experience.includes(userPreferences.experience)) score++;
+                if (userPreferences.season && place.season.includes(userPreferences.season)) score++;
+                if (userPreferences.duration && 
+                    userPreferences.duration >= place.duration[0] && 
+                    userPreferences.duration <= place.duration[1]) score++;
+                if (userPreferences.travelType && place.travelType.includes(userPreferences.travelType)) score++;
+                if (userPreferences.climate && place.climate.includes(userPreferences.climate)) score++;
+                if (place.atmosphere === userPreferences.atmosphere) score++;
+                
+                return { ...place, score };
+            }).sort((a, b) => b.score - a.score);
+            
+            console.log('Matched Places:', matchedPlaces);
+            
+            const resultContainer = document.getElementById('results');
+            if (!resultContainer) {
+                console.error('Results container not found');
+                return;
+            }
+            
+            resultContainer.innerHTML = '';
+            
+            matchedPlaces.forEach((place, index) => {
+                const destinationCard = document.createElement('div');
+                destinationCard.className = 'destination-card';
+                
+                destinationCard.innerHTML = `
+                    <div class="destination-left">
+                        <div class="destination-image">
+                            <img src="${place.Image_URL}" alt="${place.name}" onerror="this.src='https://via.placeholder.com/200x150/667eea/white?text=${encodeURIComponent(place.name)}'">
+                        </div>
+                        <div class="destination-info">
+                            <h3>${place.name} (Match: ${place.score}/7)</h3>
+                            <p><strong>Budget:</strong> ${place.budget}</p>
+                            <p><strong>Duration:</strong> ${place.duration[0]}-${place.duration[1]} days</p>
+                            <p>${place.Description}</p>
+                            <div>
+                                <strong>Experience:</strong>
+                                ${place.experience.map(exp => 
+                                    `<span class="activity-tag">${exp}</span>`
+                                ).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                resultContainer.appendChild(destinationCard);
+            });
+            
+            console.log('Results displayed successfully');
+        }
+        
+        // Call on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, calling displayResults');
+            displayResults();
+        });
+    </script>
+</body>
+</html>

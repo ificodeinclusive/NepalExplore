@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepal Explorer - Top 5 Destinations</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-mountain"></i>
+                <span>Nepal Explorer</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="results-hero">
+        <div class="results-hero-background">
+            <div class="results-hero-overlay"></div>
+        </div>
+        <div class="results-hero-content">
+            <h1>Top 5 Destinations by Matching Conditions</h1>
+        </div>
+    </div>
+
+    <div class="results-container">
+        <div class="results-header">
+            <div class="results-summary">
+                <h2><i class="fas fa-sort-numeric-up"></i> Top 5 Destinations by Match Count</h2>
+                <p>Places ranked in ascending order by number of matching conditions (fewest matches first)</p>
+            </div>
+        </div>
+        <div id="results" class="results-grid">
+            <!-- Results will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">2025 @Copyright iFiCode Inclusive - <a href="https://ificode.com" class="footer-link" target="_blank">ificode.com</a></p>
+        </div>
+    </footer>
+
+    <script src="../JS/script.js"></script>
+    <script>
+        // Function to display top 5 places in ascending order by matching conditions
+        function displayTop5() {
+            console.log('Top 5 page loaded, displaying top 5 destinations...');
+            
+            // Get user preferences from localStorage
+            const userPreferences = {
+                budget: localStorage.getItem('budget')?.toLowerCase(),
+                experience: localStorage.getItem('experience')?.toLowerCase(),
+                season: localStorage.getItem('season')?.toLowerCase(),
+                travelType: localStorage.getItem('companion')?.toLowerCase(),
+                climate: localStorage.getItem('climate')?.toLowerCase(),
+                atmosphere: localStorage.getItem('atmosphere')?.toLowerCase()
+            };
+
+            console.log('User Preferences:', userPreferences);
+
+            // Calculate match count for each place
+            const scoredPlaces = places.map(place => {
+                let matchCount = 0;
+                let matchDetails = [];
+                
+                // Budget matching
+                if (userPreferences.budget && place.budget === userPreferences.budget) {
+                    matchCount++;
+                    matchDetails.push('Budget');
+                }
+                
+                // Experience matching
+                if (userPreferences.experience && (Array.isArray(place.experience) ? place.experience.includes(userPreferences.experience) : place.experience === userPreferences.experience)) {
+                    matchCount++;
+                    matchDetails.push('Experience');
+                }
+                
+                // Season matching
+                if (userPreferences.season && (Array.isArray(place.season) ? place.season.includes(userPreferences.season) : place.season === userPreferences.season)) {
+                    matchCount++;
+                    matchDetails.push('Season');
+                }
+                
+                // Travel type matching
+                if (userPreferences.travelType && (Array.isArray(place.travelType) ? place.travelType.includes(userPreferences.travelType) : place.travelType === userPreferences.travelType)) {
+                    matchCount++;
+                    matchDetails.push('Travel Type');
+                }
+                
+                // Climate matching
+                if (userPreferences.climate && (Array.isArray(place.climate) ? place.climate.includes(userPreferences.climate) : place.climate === userPreferences.climate)) {
+                    matchCount++;
+                    matchDetails.push('Climate');
+                }
+                
+                // Atmosphere matching
+                if (userPreferences.atmosphere && place.atmosphere === userPreferences.atmosphere) {
+                    matchCount++;
+                    matchDetails.push('Atmosphere');
+                }
+                
+                return { ...place, matchCount, matchDetails };
+            });
+            
+            // Sort by match count in ascending order (fewest matches first), then by name for ties
+            scoredPlaces.sort((a, b) => {
+                if (a.matchCount === b.matchCount) {
+                    return a.name.localeCompare(b.name);
+                }
+                return a.matchCount - b.matchCount;
+            });
+            
+            // Get the first 5 places
+            const top5Places = scoredPlaces.slice(0, 5);
+            
+            console.log('Top 5 places by ascending match count:', top5Places.map(p => `${p.name}: ${p.matchCount} matches`));
+            
+            const resultContainer = document.getElementById('results');
+            if (!resultContainer) {
+                console.error('Results container not found');
+                return;
+            }
+
+            resultContainer.innerHTML = '';
+            
+            // Map URLs for different places
+            const mapUrls = {
+                "Pokhara": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEilAS3vbxRU0j36bjiHHNgAZmwbGN4tAHJimOE1Gs0glV4qM188fxYzVTkVK2u82V_aHfrG5agzEXzCs0jtbtckIYnhDRe9F_XbpUGrJ6QUQdTFTykk0znHtkT0eFgRlYyTRFI05A/s1600/pokhara+kathmandu.png",
+                "Lumbini": "https://en.setopati.com/wp-content/uploads/2018/10/ktmtolumbini.jpg",
+                "Mustang": "https://www.intriqjourney.com/wp-content/uploads/2024/01/Image-18-1-24-at-2.31%E2%80%AFPM.jpg",
+                "Chitwan": "https://richardarunachala.wordpress.com/wp-content/uploads/2012/10/image.png",
+                "Ilam": "https://communityhomestay.com/_next/image?url=http%3A%2F%2Fapi.communityhomestay.com%2Fmodules%2Ffiles%2F10434825092024EDxEvo.png&w=1920&q=75",
+                "Janakpur": "https://www.team-bhp.com/forum/attachments/travelogues/1507598d1463382465-details-shorter-new-route-kathmandu-nepal-nepalroadmap.gif",
+                "Gosaikunda": "https://www.nepalsanctuarytreks.com/wp-content/uploads/2018/04/gosainkunda-trekking-map.jpg",
+                "Dhorpatan": "https://trailrunningnepal.org/wp-content/uploads/2015/06/dhorpatan-map-from-pokhara.jpg",
+                "Rara Lake": "https://www.tourtreknepal.com/assets/images/map/map1495010652.jpg",
+                "Badimalika": "https://www.scribblemaps.com/api/maps/images/eIbDurSiR8_thumb_1200x630.jpg",
+                "Annapurna Base Camp": "https://www.nepaltrekkinginhimalaya.com/images/articles/sz4wv-annapurna-round-trekking-map.jpg",
+                "Pathivara Temple": "https://hikeontreks.com/wp-content/uploads/2021/05/Pathivara-Map.png",
+                "Sukute Beach": "https://sukutebeachresorts.com/wp-content/uploads/2023/07/sukute-map-750x316-1.png",
+                "Nagarkot": "https://nht-api.nepalhikingteam.com/media/attachments/media-e47762d6-1747302619.jpg"
+            };
+            
+            // Display the top 5 places
+            top5Places.forEach((place, index) => {
+                const destinationCard = document.createElement('div');
+                destinationCard.className = 'destination-card';
+                destinationCard.style.animationDelay = `${index * 0.2}s`;
+                
+                const mapUrl = mapUrls[place.name] || `https://via.placeholder.com/600x400/667eea/white?text=${encodeURIComponent(place.name + ' Map')}`;
+                
+                destinationCard.innerHTML = `
+                    <div class="destination-left">
+                        <div class="destination-image">
+                            <img src="${place.Image_URL}" alt="${place.name}" onerror="this.src='https://via.placeholder.com/400x250/667eea/white?text=${encodeURIComponent(place.name)}'">
+                            <div class="rank-badge">#${index + 1}</div>
+                        </div>
+                        <div class="destination-info">
+                            <h3>${place.name}</h3>
+                            <div class="destination-meta">
+                                <span><strong>Budget:</strong> ${place.budget.charAt(0).toUpperCase() + place.budget.slice(1)}</span>
+                                <span><strong>Best Season:</strong> ${place.season.map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(', ')}</span>
+                                <span><strong>Duration:</strong> ${place.duration[0]}-${place.duration[1]} days</span>
+                            </div>
+                            <div class="match-info" style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #667eea;">
+                                <strong style="color: #667eea;">Matching Conditions: ${place.matchCount}/6</strong>
+                                ${place.matchDetails.length > 0 ? 
+                                    `<div style="margin-top: 5px;">
+                                        ${place.matchDetails.map(detail => 
+                                            `<span style="display: inline-block; background: #667eea; color: white; padding: 2px 8px; margin: 2px; border-radius: 12px; font-size: 0.8em;">${detail}</span>`
+                                        ).join('')}
+                                    </div>` : 
+                                    '<div style="margin-top: 5px; color: #666; font-style: italic;">No matching conditions</div>'
+                                }
+                            </div>
+                            <p class="destination-description">${place.Description}</p>
+                            <div class="activities">
+                                <strong>Experience:</strong>
+                                ${place.experience.map(exp => 
+                                    `<span class="activity-tag">${exp.charAt(0).toUpperCase() + exp.slice(1)}</span>`
+                                ).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="destination-right">
+                        <div class="map-section">
+                            <h4><i class="fas fa-map-marked-alt"></i> Location Map</h4>
+                            <div class="map-wrapper">
+                                <img class="destination-map-image" 
+                                     src="${mapUrl}" 
+                                     alt="Map of ${place.name}" 
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="map-fallback" style="display: none;">
+                                    <i class="fas fa-map-marked-alt" style="font-size: 3rem; margin-bottom: 1rem; color: #667eea;"></i>
+                                    <h4 style="margin: 0 0 0.5rem 0; font-size: 1.2rem; color: #2c3e50;">Map of ${place.name}</h4>
+                                    <p style="margin: 0; font-size: 0.9rem; color: #666;">Location in Nepal</p>
+                                    <p style="margin: 0.5rem 0 0 0; font-size: 0.8rem; color: #999;">Interactive map coming soon</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                resultContainer.appendChild(destinationCard);
+            });
+            
+            console.log('Top 5 destinations displayed:', top5Places.map(p => p.name));
+        }
+
+        // Ensure displayTop5 is called when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Top 5 page loaded, calling displayTop5...');
+            if (typeof places !== 'undefined') {
+                displayTop5();
+            } else {
+                console.error('Places array not found');
+            }
+        });
+    </script>
+</body>
+</html>

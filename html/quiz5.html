@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepal Explorer - Travel Companion Selection</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-mountain"></i>
+                <span>Nepal Explorer</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="quiz-header">
+        <h2>Please choose the answer</h2>
+    </div>
+
+    <div class="quiz-container">
+        <div class="quiz-progress-container">
+            <div class="quiz-progress">
+                <div class="progress-bar" style="width: 62.5%"></div>
+            </div>
+            <div class="progress-text">Question 5 of 8</div>
+        </div>
+
+        <div class="question-container">
+            <div class="question-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <h2 class="question-title">Are you traveling solo or with others?</h2>
+            <p class="question-subtitle">Choose your travel companion preference</p>
+            
+            <div class="options-grid">
+                <label class="option-card">
+                    <input type="radio" name="companion" value="Solo">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>Solo</h3>
+                            <p>Traveling alone for personal discovery</p>
+                        </div>
+                    </div>
+                </label>
+                
+                <label class="option-card">
+                    <input type="radio" name="companion" value="Couple">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>Couple</h3>
+                            <p>Romantic getaway with your partner</p>
+                        </div>
+                    </div>
+                </label>
+                
+                <label class="option-card">
+                    <input type="radio" name="companion" value="Family">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>Family</h3>
+                            <p>Traveling with family members</p>
+                        </div>
+                    </div>
+                </label>
+                
+                <label class="option-card">
+                    <input type="radio" name="companion" value="Friends">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>Friends</h3>
+                            <p>Group adventure with friends</p>
+                        </div>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">2025 @Copyright iFiCode Inclusive - <a href="https://ificode.com" class="footer-link" target="_blank">ificode.com</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const radioButtons = document.querySelectorAll('input[name="companion"]');
+            
+            radioButtons.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.checked) {
+                        localStorage.setItem('companion', this.value);
+                        
+                        setTimeout(() => {
+                            window.location.href = 'quiz6.html';
+                        }, 1000);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepal Explorer - Experience Selection</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-mountain"></i>
+                <span>Nepal Explorer</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="quiz-header">
+        <h2>Please choose the answer</h2>
+    </div>
+
+    <div class="quiz-container">
+        <div class="quiz-progress-container">
+            <div class="quiz-progress">
+                <div class="progress-bar" style="width: 25%"></div>
+            </div>
+            <div class="progress-text">Question 2 of 8</div>
+        </div>
+
+        <div class="question-container">
+            <div class="question-icon">
+                <i class="fas fa-compass"></i>
+            </div>
+            <h2 class="question-title">What kind of experience are you looking for?</h2>
+            <p class="question-subtitle">Choose the type of experience that interests you most</p>
+            
+            <div class="options-grid">
+                <label class="option-card">
+                    <input type="radio" name="experience" value="Nature">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>Nature</h3>
+                            <p>Explore natural landscapes and outdoor beauty</p>
+                        </div>
+                    </div>
+                </label>
+                
+                <label class="option-card">
+                    <input type="radio" name="experience" value="Adventure">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>Adventure</h3>
+                            <p>Thrilling activities and exciting challenges</p>
+                        </div>
+                    </div>
+                </label>
+                
+                <label class="option-card">
+                    <input type="radio" name="experience" value="Cultural">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-landmark"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>Cultural</h3>
+                            <p>Immerse yourself in local traditions and heritage</p>
+                        </div>
+                    </div>
+                </label>
+                
+                <label class="option-card">
+                    <input type="radio" name="experience" value="Spiritual">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-om"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>Spiritual</h3>
+                            <p>Find inner peace and spiritual enlightenment</p>
+                        </div>
+                    </div>
+                </label>
+                
+                <label class="option-card">
+                    <input type="radio" name="experience" value="Relaxation">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-spa"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>Relaxation</h3>
+                            <p>Unwind and rejuvenate in peaceful settings</p>
+                        </div>
+                    </div>
+                </label>
+                
+                <label class="option-card">
+                    <input type="radio" name="experience" value="Wildlife">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-paw"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>Wildlife</h3>
+                            <p>Discover diverse wildlife and natural habitats</p>
+                        </div>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">2025 @Copyright iFiCode Inclusive - <a href="https://ificode.com" class="footer-link" target="_blank">ificode.com</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const radioButtons = document.querySelectorAll('input[name="experience"]');
+            
+            radioButtons.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.checked) {
+                        localStorage.setItem('experience', this.value);
+                        
+                        setTimeout(() => {
+                            window.location.href = 'quiz3.html';
+                        }, 1000);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

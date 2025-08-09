@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Test - Nepal Explorer</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+    <h1>Debug Test Page</h1>
+    <div id="results" class="results-grid">
+        <!-- Results will be populated by JavaScript -->
+    </div>
+    
+    <button onclick="testDisplayResults()">Test Display Results</button>
+    
+    <script src="JS/script.js"></script>
+    <script>
+        function testDisplayResults() {
+            console.log('Test button clicked');
+            
+            // Set test data
+            localStorage.setItem('userBudget', 'medium');
+            localStorage.setItem('userExperience', 'nature');
+            localStorage.setItem('userSeason', 'spring');
+            localStorage.setItem('userDuration', '5');
+            localStorage.setItem('userTravelType', 'couple');
+            localStorage.setItem('userClimate', 'moderate');
+            localStorage.setItem('userAtmosphere', 'peaceful');
+            
+            console.log('Test data set in localStorage');
+            
+            // Call displayResults
+            displayResults();
+        }
+        
+        // Auto-run test on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Debug page loaded');
+            testDisplayResults();
+        });
+    </script>
+</body>
+</html>

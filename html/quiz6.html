@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepal Explorer - Climate Preference</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-mountain"></i>
+                <span>Nepal Explorer</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="quiz-header">
+        <h2>Please choose the answer</h2>
+    </div>
+
+    <div class="quiz-container">
+        <div class="quiz-progress-container">
+            <div class="quiz-progress">
+                <div class="progress-bar" style="width: 75%"></div>
+            </div>
+            <div class="progress-text">Question 6 of 8</div>
+        </div>
+
+        <div class="question-container">
+            <div class="question-icon">
+                <i class="fas fa-thermometer-half"></i>
+            </div>
+            <h2 class="question-title">What kind of climate do you enjoy?</h2>
+            <p class="question-subtitle">Select your preferred weather conditions</p>
+            
+            <div class="options-grid">
+                <label class="option-card">
+                    <input type="radio" name="climate" value="Cold">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-snowflake"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>Cold</h3>
+                            <p>Cool mountain air and crisp temperatures</p>
+                        </div>
+                    </div>
+                </label>
+                
+                <label class="option-card">
+                    <input type="radio" name="climate" value="Moderate">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>Moderate</h3>
+                            <p>Pleasant temperatures, not too hot or cold</p>
+                        </div>
+                    </div>
+                </label>
+                
+                <label class="option-card">
+                    <input type="radio" name="climate" value="Warm">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>Warm</h3>
+                            <p>Warmer temperatures and sunny days</p>
+                        </div>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">2025 @Copyright iFiCode Inclusive - <a href="https://ificode.com" class="footer-link" target="_blank">ificode.com</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const radioButtons = document.querySelectorAll('input[name="climate"]');
+            
+            radioButtons.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.checked) {
+                        localStorage.setItem('climate', this.value);
+                        
+                        setTimeout(() => {
+                            window.location.href = 'quiz7.html';
+                        }, 1000);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

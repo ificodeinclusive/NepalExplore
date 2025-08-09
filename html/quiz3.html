@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepal Explorer - Season Selection</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-mountain"></i>
+                <span>Nepal Explorer</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="quiz-header">
+        <h2>Please choose the answer</h2>
+    </div>
+
+    <div class="quiz-container">
+        <div class="quiz-progress-container">
+            <div class="quiz-progress">
+                <div class="progress-bar" style="width: 37.5%"></div>
+            </div>
+            <div class="progress-text">Question 3 of 8</div>
+        </div>
+
+        <div class="question-container">
+            <div class="question-icon">
+                <i class="fas fa-calendar-alt"></i>
+            </div>
+            <h2 class="question-title">Which season do you plan to travel in?</h2>
+            <p class="question-subtitle">Select the season that works best for your travel plans</p>
+            
+            <div class="options-grid">
+                <label class="option-card">
+                    <input type="radio" name="season" value="Spring">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>Spring</h3>
+                            <p>March - May</p>
+                        </div>
+                    </div>
+                </label>
+                
+                <label class="option-card">
+                    <input type="radio" name="season" value="Summer">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <div class="option-text">
+                            <h3>Summer</h3>
+                            <p>June - August</p>
+                        </div>
+                    </div>
+                </label>
+                
+                <label class="option-card">
+                    <input type="radio" name="season" value="Autumn">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-leaf"></i>
+        </div>
+                        <div class="option-text">
+                            <h3>Autumn</h3>
+                            <p>September - November</p>
+    </div>
+                    </div>
+                </label>
+                
+                <label class="option-card">
+                    <input type="radio" name="season" value="Winter">
+                    <div class="option-content">
+                        <div class="option-icon">
+                            <i class="fas fa-snowflake"></i>
+                </div>
+                        <div class="option-text">
+                            <h3>Winter</h3>
+                            <p>December - February</p>
+                </div>
+            </div>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">2025 @Copyright iFiCode Inclusive - <a href="https://ificode.com" class="footer-link" target="_blank">ificode.com</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const radioButtons = document.querySelectorAll('input[name="season"]');
+            
+            radioButtons.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.checked) {
+                        localStorage.setItem('season', this.value);
+                        
+                        setTimeout(() => {
+                            window.location.href = 'quiz4.html';
+                        }, 1000);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

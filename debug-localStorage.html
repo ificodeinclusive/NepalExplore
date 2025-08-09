@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug localStorage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .debug-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .debug-section {
+            margin-bottom: 15px;
+        }
+        .debug-section h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .debug-value {
+            background: #f8f9fa;
+            padding: 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            border-left: 4px solid #007bff;
+        }
+        .null-value {
+            border-left-color: #dc3545;
+            color: #dc3545;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .test-data {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Debug localStorage Values</h1>
+    
+    <div class="debug-container">
+        <h2>Current localStorage Values</h2>
+        <div id="localStorage-values"></div>
+        <button onclick="refreshValues()">Refresh Values</button>
+        <button onclick="clearAll()">Clear All</button>
+    </div>
+
+    <div class="debug-container">
+        <h2>Set Test Data</h2>
+        <button onclick="setTestData()">Set Sample Quiz Data</button>
+        <div class="test-data">
+            This will set: Budget=medium, Experience=nature, Season=spring, TravelType=couple, Climate=moderate, Atmosphere=balanced, Final=View My Results
+        </div>
+    </div>
+
+    <div class="debug-container">
+        <h2>Test Matching Logic</h2>
+        <button onclick="testMatching()">Test Place Matching</button>
+        <div id="matching-results"></div>
+    </div>
+
+    <script src="JS/script.js"></script>
+    <script>
+        function refreshValues() {
+            const container = document.getElementById('localStorage-values');
+            const keys = [
+                'budget', 'experience', 'season', 
+                'companion', 'climate', 'atmosphere', 'final'
+            ];
+            
+            let html = '';
+            keys.forEach(key => {
+                const value = localStorage.getItem(key);
+                const isNull = value === null || value === undefined;
+                html += `
+                    <div class="debug-section">
+                        <h3>${key}</h3>
+                        <div class="debug-value ${isNull ? 'null-value' : ''}">${value || 'null'}</div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function clearAll() {
+            localStorage.clear();
+            refreshValues();
+        }
+
+        function setTestData() {
+            localStorage.setItem('budget', 'Medium');
+            localStorage.setItem('experience', 'Adventure');
+            localStorage.setItem('season', 'Spring');
+            localStorage.setItem('companion', 'Solo');
+            localStorage.setItem('climate', 'Moderate');
+            localStorage.setItem('atmosphere', 'Peaceful');
+            localStorage.setItem('final', 'Get Recommendation');
+            refreshValues();
+        }
+
+        function testMatching() {
+            const userPreferences = {
+                budget: localStorage.getItem('budget')?.toLowerCase(),
+                experience: localStorage.getItem('experience')?.toLowerCase(),
+                season: localStorage.getItem('season')?.toLowerCase(),
+                travelType: localStorage.getItem('companion')?.toLowerCase(),
+                climate: localStorage.getItem('climate')?.toLowerCase(),
+                atmosphere: localStorage.getItem('atmosphere')?.toLowerCase()
+            };
+
+            console.log('Testing with preferences:', userPreferences);
+
+            const matchedPlaces = places.map(place => {
+                let score = 0;
+                let matchDetails = [];
+                
+                // Budget matching
+                if (userPreferences.budget && place.budget === userPreferences.budget) {
+                    score++;
+                    matchDetails.push(`Budget: ✓`);
+                } else {
+                    matchDetails.push(`Budget: ✗ (${userPreferences.budget} ≠ ${place.budget})`);
+                }
+                
+                // Experience matching
+                if (userPreferences.experience && place.experience.includes(userPreferences.experience)) {
+                    score++;
+                    matchDetails.push(`Experience: ✓`);
+                } else {
+                    matchDetails.push(`Experience: ✗ (${userPreferences.experience} not in [${place.experience.join(', ')}])`);
+                }
+                
+                // Season matching
+                if (userPreferences.season && place.season.includes(userPreferences.season)) {
+                    score++;
+                    matchDetails.push(`Season: ✓`);
+                } else {
+                    matchDetails.push(`Season: ✗ (${userPreferences.season} not in [${place.season.join(', ')}])`);
+                }
+                
+                // Travel type matching
+                if (userPreferences.travelType && place.travelType.includes(userPreferences.travelType)) {
+                    score++;
+                    matchDetails.push(`Travel Type: ✓`);
+                } else {
+                    matchDetails.push(`Travel Type: ✗ (${userPreferences.travelType} not in [${place.travelType.join(', ')}])`);
+                }
+                
+                // Climate matching
+                if (userPreferences.climate && place.climate.includes(userPreferences.climate)) {
+                    score++;
+                    matchDetails.push(`Climate: ✓`);
+                } else {
+                    matchDetails.push(`Climate: ✗ (${userPreferences.climate} not in [${place.climate.join(', ')}])`);
+                }
+                
+                // Atmosphere matching
+                if (userPreferences.atmosphere && place.atmosphere === userPreferences.atmosphere) {
+                    score++;
+                    matchDetails.push(`Atmosphere: ✓`);
+                } else {
+                    matchDetails.push(`Atmosphere: ✗ (${userPreferences.atmosphere} ≠ ${place.atmosphere})`);
+                }
+
+                return { 
+                    name: place.name, 
+                    score, 
+                    matchDetails,
+                    totalScore: `${score}/6`
+                };
+            }).sort((a, b) => b.score - a.score);
+
+            const resultsContainer = document.getElementById('matching-results');
+            let html = '<h3>Matching Results (sorted by score):</h3>';
+            
+            matchedPlaces.forEach(place => {
+                html += `
+                    <div style="border: 1px solid #ddd; margin: 10px 0; padding: 10px; border-radius: 4px;">
+                        <h4>${place.name} - Score: ${place.totalScore}</h4>
+                        <ul>
+                            ${place.matchDetails.map(detail => `<li>${detail}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            });
+            
+            resultsContainer.innerHTML = html;
+        }
+
+        // Initialize
+        refreshValues();
+    </script>
+</body>
+</html>
