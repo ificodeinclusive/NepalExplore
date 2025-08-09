@@ -6,7 +6,7 @@
 }
 
 body {
-    background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url('https://www.nepaltrekking.com/wp-content/uploads/2019/05/natural88-1-1-975x540.jpg') center/cover;
+    background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url('../images/hero.png') center/cover;
     color: #333;
     line-height: 1.6;
     overflow-x: hidden;

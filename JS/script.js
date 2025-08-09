@@ -305,17 +305,12 @@ function displayResults() {
 
     resultContainer.innerHTML = '';
     
-    // If no exact matches, show places with most matching tags
+    // Show only the best single match
     let topMatches, headerText;
     
     if (matchingPlaces.length > 0) {
-        if (finalChoice === 'Get Recommendation') {
-            topMatches = matchingPlaces.slice(0, 5);
-            headerText = 'Top 5 Recommendations for You';
-        } else {
-            topMatches = matchingPlaces.slice(0, 3);
-            headerText = 'Your Perfect Matches';
-        }
+        topMatches = matchingPlaces.slice(0, 1); // Only show the first (best) match
+        headerText = 'Your Perfect Match';
     } else {
         // Fallback: show places with most matching individual tags (exact matches only)
         const scoredPlaces = places.map(place => {
@@ -337,19 +332,16 @@ function displayResults() {
         if (filteredPlaces.length === 0) {
             topMatches = [];
             headerText = 'No Matching Destinations Found';
-        } else if (finalChoice === 'Get Recommendation') {
-            topMatches = filteredPlaces.slice(0, 5);
-            headerText = 'Top 5 Recommendations (Partial Matches)';
         } else {
-            topMatches = filteredPlaces.slice(0, 3);
-            headerText = 'Best Available Matches';
+            topMatches = filteredPlaces.slice(0, 1); // Only show the best match
+            headerText = 'Your Best Match';
         }
     }
     
     console.log('Selected matches:', topMatches.map(p => p.name));
     
     // Update the header text
-    const headerElement = document.querySelector('.results-summary h2');
+    const headerElement = document.querySelector('.results-summary h1');
     if (headerElement) {
         headerElement.innerHTML = `<i class="fas fa-star"></i> ${headerText}`;
     }
