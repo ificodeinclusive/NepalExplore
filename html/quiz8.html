@@ -43,33 +43,33 @@
             
             <div class="options-grid">
                 <label class="option-card">
-                    <input type="radio" name="final" value="View My Results">
+                    <input type="radio" name="final" value="View Results">
                     <div class="option-content">
                         <div class="option-icon">
                             <i class="fas fa-star"></i>
                         </div>
                         <div class="option-text">
                             <h3>View My Results</h3>
-                            <p>See destinations that match your preferences perfectly</p>
+                            <p>See your personalized destination recommendation</p>
                         </div>
                     </div>
                 </label>
                 
                 <label class="option-card">
-                    <input type="radio" name="final" value="Get Recommendation">
+                    <input type="radio" name="final" value="View Results">
                     <div class="option-content">
                         <div class="option-icon">
                             <i class="fas fa-map-marked-alt"></i>
                         </div>
                         <div class="option-text">
                             <h3>Get Recommendation</h3>
-                            <p>Discover top 5 Nepal destinations for you</p>
+                            <p>Discover your perfect Nepal destination</p>
                         </div>
                     </div>
                 </label>
                 
                 <label class="option-card">
-                    <input type="radio" name="final" value="Find My Destination">
+                    <input type="radio" name="final" value="View Results">
                     <div class="option-content">
                         <div class="option-icon">
                             <i class="fas fa-compass"></i>
@@ -84,12 +84,6 @@
         </div>
     </div>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p class="footer-text">2025 @Copyright iFiCode Inclusive - <a href="https://ificode.com" class="footer-link" target="_blank">ificode.com</a></p>
-        </div>
-    </footer>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const radioButtons = document.querySelectorAll('input[name="final"]');
@@ -100,13 +94,7 @@
                         localStorage.setItem('final', this.value);
                         
                         setTimeout(() => {
-                            // Redirect to top5.html if "Get Recommendation" is selected
-                            if (this.value === 'Get Recommendation') {
-                                window.location.href = 'top5.html';
-                            } else {
-                                // Redirect to result.html for other options
-                                window.location.href = 'result.html';
-                            }
+                            window.location.href = 'result.html';
                         }, 1000);
                     }
                 });
