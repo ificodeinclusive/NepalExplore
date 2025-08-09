@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nepal Explorer - Top 5 Destinations</title>
+    <title>Nepal Explorer - Top 5 Best Matches</title>
     <link rel="stylesheet" href="../CSS/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -27,15 +27,15 @@
             <div class="results-hero-overlay"></div>
         </div>
         <div class="results-hero-content">
-            <h1>Top 5 Destinations by Matching Conditions</h1>
+            <h1>Top 5 Best Matching Destinations</h1>
         </div>
     </div>
 
     <div class="results-container">
         <div class="results-header">
             <div class="results-summary">
-                <h2><i class="fas fa-sort-numeric-up"></i> Top 5 Destinations by Match Count</h2>
-                <p>Places ranked in ascending order by number of matching conditions (fewest matches first)</p>
+                <h2><i class="fas fa-sort-numeric-down"></i> Top 5 Best Matching Destinations</h2>
+                <p>Places ranked by highest number of matching conditions (best matches first)</p>
             </div>
         </div>
         <div id="results" class="results-grid">
@@ -43,11 +43,7 @@
         </div>
     </div>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p class="footer-text">2025 @Copyright iFiCode Inclusive - <a href="https://ificode.com" class="footer-link" target="_blank">ificode.com</a></p>
-        </div>
-    </footer>
+
 
     <script src="../JS/script.js"></script>
     <script>
@@ -111,18 +107,18 @@
                 return { ...place, matchCount, matchDetails };
             });
             
-            // Sort by match count in ascending order (fewest matches first), then by name for ties
+            // Sort by match count in descending order (highest matches first), then by name for ties
             scoredPlaces.sort((a, b) => {
                 if (a.matchCount === b.matchCount) {
                     return a.name.localeCompare(b.name);
                 }
-                return a.matchCount - b.matchCount;
+                return b.matchCount - a.matchCount; // Changed to descending order
             });
             
-            // Get the first 5 places
+            // Get the top 5 places with highest match counts
             const top5Places = scoredPlaces.slice(0, 5);
             
-            console.log('Top 5 places by ascending match count:', top5Places.map(p => `${p.name}: ${p.matchCount} matches`));
+            console.log('Top 5 places by highest match count:', top5Places.map(p => `${p.name}: ${p.matchCount} matches`));
             
             const resultContainer = document.getElementById('results');
             if (!resultContainer) {

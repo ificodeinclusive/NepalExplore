@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../CSS/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<body onload="displayResults()">
+<body>
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
@@ -22,20 +22,34 @@
         </div>
     </nav>
 
-    <div class="results-hero">
-        <div class="results-hero-background">
-            <div class="results-hero-overlay"></div>
+    <div class="results-container">
+        <div class="results-header">
+            <div class="results-summary">
+                <div class="results-icon">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <h1>Your Nepal Adventure Recommendations</h1>
+                <p>Based on your preferences, here are the perfect destinations for your Nepal journey</p>
+            </div>
         </div>
-        <div class="results-hero-content">
-            <h1>Based on your preferences, here are the best places to visit in Nepal</h1>
+        <div id="results" class="results-grid">
+            <!-- Results will be populated by JavaScript -->
         </div>
     </div>
 
-    <div class="results-container">
-        <div id="recommendations" class="results-grid">
-        </div>
-    </div>
+
 
     <script src="../JS/script.js"></script>
+    <script>
+        // Ensure displayResults is called when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Result page loaded, calling displayResults...');
+            if (typeof displayResults === 'function') {
+                displayResults();
+            } else {
+                console.error('displayResults function not found');
+            }
+        });
+    </script>
 </body>
 </html>

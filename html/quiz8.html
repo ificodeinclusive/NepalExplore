@@ -43,33 +43,33 @@
             
             <div class="options-grid">
                 <label class="option-card">
-                    <input type="radio" name="final" value="View Results">
+                    <input type="radio" name="final" value="View My Results">
                     <div class="option-content">
                         <div class="option-icon">
                             <i class="fas fa-star"></i>
                         </div>
                         <div class="option-text">
                             <h3>View My Results</h3>
-                            <p>See your personalized destination recommendation</p>
+                            <p>See destinations that match your preferences perfectly</p>
                         </div>
                     </div>
                 </label>
                 
                 <label class="option-card">
-                    <input type="radio" name="final" value="View Results">
+                    <input type="radio" name="final" value="Get Recommendation">
                     <div class="option-content">
                         <div class="option-icon">
                             <i class="fas fa-map-marked-alt"></i>
                         </div>
                         <div class="option-text">
                             <h3>Get Recommendation</h3>
-                            <p>Discover your perfect Nepal destination</p>
+                            <p>Discover top 5 Nepal destinations for you</p>
                         </div>
                     </div>
                 </label>
                 
                 <label class="option-card">
-                    <input type="radio" name="final" value="View Results">
+                    <input type="radio" name="final" value="Find My Destination">
                     <div class="option-content">
                         <div class="option-icon">
                             <i class="fas fa-compass"></i>
@@ -84,6 +84,8 @@
         </div>
     </div>
 
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const radioButtons = document.querySelectorAll('input[name="final"]');
@@ -94,7 +96,13 @@
                         localStorage.setItem('final', this.value);
                         
                         setTimeout(() => {
-                            window.location.href = 'result.html';
+                            // Redirect to top5.html if "Get Recommendation" is selected
+                            if (this.value === 'Get Recommendation') {
+                                window.location.href = 'top5.html';
+                            } else {
+                                // Redirect to result.html for other options
+                                window.location.href = 'result.html';
+                            }
                         }, 1000);
                     }
                 });
